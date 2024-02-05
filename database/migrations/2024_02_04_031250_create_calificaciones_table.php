@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_alumno');
             $table->unsignedBigInteger('id_materia');
+            $table->integer('parcial');
+            $table->decimal('calificacion',3,1)->nullable();
             $table->foreign('id_alumno')->references('id')->on('alumnos');
             $table->foreign('id_materia')->references('id')->on('materias');
             $table->timestamps();

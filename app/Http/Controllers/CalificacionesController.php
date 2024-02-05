@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\calificaciones;
 use App\Http\Requests\StorecalificacionesRequest;
 use App\Http\Requests\UpdatecalificacionesRequest;
+use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class CalificacionesController extends Controller
 {
@@ -35,9 +38,14 @@ class CalificacionesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(calificaciones $calificaciones)
+    public function show($id)
     {
-        //
+        $alumno=DB::table('alumnos')
+        ->join('carreras','alumnos.id_carrera','=','carreras.id')
+        ->where('alumnos.id',$id)
+        ->first();
+        $carreras=DB::table('carreras')->get();
+        return view('partials.perfil_alumno',compact('alumno','carreras','id'));
     }
 
     /**
