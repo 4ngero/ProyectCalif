@@ -20,3 +20,5 @@ Route::post('/alumno_store',[AlumnosController::class,'store']);
 
 Route::get('/calificaciones/{id}',[CalificacionesController::class,'show']);
 Route::post('/alumno_update/{id}',[AlumnosController::class,'update']);
+
+Route::post('/alumno_create/{id}',[CalificacionesController::class,'create']);
