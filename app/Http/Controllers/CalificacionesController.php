@@ -22,9 +22,16 @@ class CalificacionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $req,$id)
     {
-        //
+        DB::table('calificaciones')->insert([
+            "id_alumno"=>$id,
+            "id_materia"=>$req->input('_Asignatura'),
+            "parcial"=>1,
+            "created_at"=>Carbon::now(),
+            "updated_at"=>Carbon::now(),
+        ]);
+        return back()->with('Confirmacion',"Asignatura registrada correctamente");
     }
 
     /**
@@ -44,8 +51,13 @@ class CalificacionesController extends Controller
         ->join('carreras','alumnos.id_carrera','=','carreras.id')
         ->where('alumnos.id',$id)
         ->first();
+        $asignaturas=DB::table('materias')->get();
         $carreras=DB::table('carreras')->get();
-        return view('partials.perfil_alumno',compact('alumno','carreras','id'));
+        $inscripcion=DB::table('calificaciones')
+        ->join('materias','materias.id','=','calificaciones.id_materia')
+        ->where('calificaciones.id_alumno',$id)
+        ->get();
+        return view('partials.perfil_alumno',compact('alumno','carreras','id','asignaturas','inscripcion'));
     }
 
     /**

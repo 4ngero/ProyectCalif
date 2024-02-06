@@ -61,21 +61,28 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Subject</th>
+                                    <th>Asignatura</th>
                                     <th>Primer Parcial</th>
                                     <th>Segundo Parcial</th>
                                     <th>Tercer Parcial</th>
                                     <th>Final</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($inscripcion as $ins)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <form action="" method="POST">
+                                        @csrf
+                                    <td>{{$ins->nombre}}</td>
+                                    <td><input type="text" class="form-control" name="_C1" value="{{$ins->calificacion1}}"></td>
+                                    <td><input type="text" class="form-control" name="_C2" value="{{$ins->calificacion2}}"></td>
+                                    <td><input type="text" class="form-control" name="_C3" value="{{$ins->calificacion3}}"></td>
+                                    <td><input type="text" class="form-control" name="_C4" value="{{$ins->final}}"></td>
+                                    <td><button type="submit" class="btn btn-primary">Actualizar</button></td>
+                                    </form>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
