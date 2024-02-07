@@ -121,7 +121,7 @@ class AlumnosController extends Controller
             "id_carrera"=>$req->input('_Carrera'),
             "updated_at"=>Carbon::now(),
         ]);
-        return back()->with('Confirmacion',"Alumno registrado correctamente");
+        return back()->with('Confirmacion',"Alumno actualizado correctamente");
     }
 
     /**
