@@ -89,6 +89,11 @@ class CalificacionesController extends Controller
             $n = $t-$aprob-$reprob;
             $numExamenes = $n;
             $probExamen = 31 / 101;
+            DB::table('alumnos')->where('id', $id)
+                ->update([
+                    "porcentaje"=>100,
+                    "updated_at" => Carbon::now(),
+                ]);
             if ($n!=0){
                 if($k>0){
                 $probabilidadAprobar = $this->coeficienteBinomial($numExamenes, $k)*pow($probExamen, $k)*pow(1 - $probExamen, $numExamenes - $k)*100;
