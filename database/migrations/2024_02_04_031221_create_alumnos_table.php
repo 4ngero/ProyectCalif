@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->integer('cuatrimestre');
             $table->unsignedBigInteger('id_carrera');
+            $table->decimal('porcentaje',5,2)->nullable();
             $table->foreign('id_carrera')->references('id')->on('carreras');
             $table->timestamps();
         });

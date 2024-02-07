@@ -3,7 +3,7 @@
 @section('contenido')
 
 <div class="container">
-    <div class="row">
+    <div class="row">   
         <div class="col-4">
             <div class=" card card-body mt-5 mb-5">
                 <div class="row">
@@ -65,24 +65,41 @@
                                     <th>Primer Parcial</th>
                                     <th>Segundo Parcial</th>
                                     <th>Tercer Parcial</th>
-                                    <th>Final</th>
+                                    <th>Probabilidad de Pasar</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($inscripcion as $ins)
                                 <tr>
-                                    <form action="" method="POST">
-                                        @csrf
+                                    <form action="/calificaciones/update/{{$ins->calificaciones_id}}" method="POST">
+                                    @csrf
                                     <td>{{$ins->nombre}}</td>
                                     <td><input type="text" class="form-control" name="_C1" value="{{$ins->calificacion1}}"></td>
                                     <td><input type="text" class="form-control" name="_C2" value="{{$ins->calificacion2}}"></td>
                                     <td><input type="text" class="form-control" name="_C3" value="{{$ins->calificacion3}}"></td>
-                                    <td><input type="text" class="form-control" name="_C4" value="{{$ins->final}}"></td>
+                                    <td>
+                                        @if($ins->calificacion1 !== null && $ins->calificacion2 !== null && $ins->calificacion3 !== null)
+                                            <input type="text" class="form-control" name="_C4" value="{{ $ins->final == 1 ? '100%' : ($ins->final == 0 ? '0%' : 'Presentar Final')}}" disabled>
+                                        @else
+                                        @php
+                                            $numNulls = ($ins->calificacion1 === null ? 1 : 0) + ($ins->calificacion2 === null ? 1 : 0) + ($ins->calificacion3 === null ? 1 : 0);
+                                            $probabilidad = pow(31 / 101, $numNulls);
+                                        @endphp
+                                        <input type="text" class="form-control" name="_C4" value="{{ number_format($probabilidad * 100, 2) }}%" disabled>
+                                        @endif
+                                    </td>
                                     <td><button type="submit" class="btn btn-primary">Actualizar</button></td>
                                     </form>
                                 </tr>
                                 @endforeach
+                                <tr style="border-top: 1px solid black;">
+                                    <td></td>
+                                    <td colspan="3" class="text-end"><b>Probabilidad de pasar el cuatrimestre:</b></td>
+                                    <td><input type="text" class="form-control" name="_C4" value="{{ number_format($probabilidadAprobar, 2) }} %" disabled></td>
+                                    <td></td>
+                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
