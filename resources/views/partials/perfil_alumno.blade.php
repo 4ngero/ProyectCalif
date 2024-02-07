@@ -4,7 +4,7 @@
 <body style="background-color:rgb(169, 182, 187);">
 <div class="container">
     <div class="row">   
-        <div class="col-4">
+        <div class="col-3">
             <div class="card card-body mt-5 mb-5">
                 <div class="row">
                     <div class="col-12">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-9">
             <div class="card card-body mt-5"> 
                 <div class="row">
                     <div class="col">
@@ -92,7 +92,7 @@
                                         <input type="text" class="form-control" name="_C4" value="{{ number_format($probabilidad * 100, 2) }}%" disabled>
                                         @endif
                                     </td>
-                                    <td><button type="submit" class="btn btn-primary">Actualizar</button></td>
+                                    <td style="width: 150px;"><button type="submit" class="btn btn-outline-primary"><i class="bi bi-arrow-repeat"> Actualizar</i></button></td>
                                     </form>
                                 </tr>
                                 @endforeach

@@ -19,6 +19,7 @@
     @vite(['resources/js/app.js'])
     <title>@yield('titulo')</title>
 </head>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
@@ -40,8 +41,8 @@
 
 <body class="d-flex flex-column min-vh-100">
     
-
-    <h1 class="display-1 text-center text-primary mt-4">@yield('titulo')</h1>
+  @include('partials.alerta')
+    <h1 class="display-1 text-center text-info-emphasis mt-4">@yield('titulo')</h1>
     @yield('contenido')
 
 </html>

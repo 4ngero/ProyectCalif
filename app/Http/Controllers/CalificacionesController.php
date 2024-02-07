@@ -95,17 +95,26 @@ class CalificacionesController extends Controller
                     "updated_at" => Carbon::now(),
                 ]);
             if ($n!=0){
-                if($k>0){
-                $probabilidadAprobar = $this->coeficienteBinomial($numExamenes, $k)*pow($probExamen, $k)*pow(1 - $probExamen, $numExamenes - $k)*100;
+                
+                if($k>0 && $n>$k){
+                    $probabilidadAprobar = $this->coeficienteBinomial($numExamenes, $k)*pow($probExamen, $k)*pow(1 - $probExamen, $numExamenes - $k)*100;
+                    DB::table('alumnos')->where('id', $id)
+                    ->update([
+                        "porcentaje"=>$probabilidadAprobar,
+                        "updated_at" => Carbon::now(),
+                    ]);
+                    }
+            }
+            else{
+                $probabilidadAprobar =100;
                 DB::table('alumnos')->where('id', $id)
                 ->update([
                     "porcentaje"=>$probabilidadAprobar,
                     "updated_at" => Carbon::now(),
                 ]);
-                }
             }
-            else{
-                $probabilidadAprobar =100;
+            if($min<$reprob){
+                $probabilidadAprobar =0;
                 DB::table('alumnos')->where('id', $id)
                 ->update([
                     "porcentaje"=>$probabilidadAprobar,
