@@ -29,7 +29,7 @@ return new class extends Migration
             ['Nombre' => 'Ingeniería de Software', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
             ['Nombre' => 'Física para Ingeniería', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
             ['Nombre' => 'Estructura de Datos', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
-            ['Nombre' => 'Porbabilidad y Estadística', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
+            ['Nombre' => 'Probabilidad y Estadística', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
             ['Nombre' => 'Introducción a las Tecnologías de la Información', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
             ['Nombre' => 'Electricidad y Magnetismo', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],
             ['Nombre' => 'Química', 'created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),],

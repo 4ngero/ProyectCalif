@@ -51,9 +51,22 @@ class AlumnosController extends Controller
      */
     public function show()
     {
-        $alumnos=DB::table('alumnos')
-        ->join('carreras','alumnos.id_carrera','=','carreras.id')
+        $alumnos = DB::table('alumnos')
+        ->select(
+            'alumnos.id as id',
+            'alumnos.matricula as matricula',
+            'alumnos.alumnos as alumnos',
+            'alumnos.primer_apellido as primer_apellido',
+            'alumnos.segundo_apellido as segundo_apellido',
+            'alumnos.fecha_nacimiento as fecha_nacimiento',
+            'alumnos.cuatrimestre as cuatrimestre',
+            'alumnos.porcentaje as porcentaje',
+            'carreras.nombre as nombre',
+            DB::raw('(SELECT COUNT(*) FROM calificaciones WHERE calificaciones.id_alumno = alumnos.id) as asignaturas')
+        )
+        ->join('carreras', 'carreras.id', '=', 'alumnos.id_carrera')
         ->get();
+        
         $carreras=DB::table('carreras')->get();
         return view('partials.alumnos',compact('carreras','alumnos'));
     }

@@ -42,7 +42,13 @@
         </thead>
         <tbody>
             @foreach($alumnos as $a)
-            <tr>
+            <tr @if($a->asignaturas < 7) class="table-warning"
+                @elseif($a->asignaturas >= 7)
+                        @if($a->porcentaje > 70) class="table-success"
+                        @elseif($a->porcentaje <= 70 && $a->porcentaje >= 30) class="table-info"
+                        @else class="table-danger"
+                        @endif
+                @endif>
                 <td scope="col">{{$a->matricula}}</td>
                 <td scope="col">{{$a->alumnos}}</td>
                 <td scope="col">{{$a->primer_apellido}}</td>
