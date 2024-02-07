@@ -71,6 +71,32 @@ class AlumnosController extends Controller
         return view('partials.alumnos',compact('carreras','alumnos'));
     }
 
+    public function search(Request $req)
+    {
+        $matricula=$req->input('_busq');
+        if(empty($matricula)) {
+            return redirect('/');
+        }
+        $alumnos = DB::table('alumnos')->where('matricula',$matricula)
+        ->select(
+            'alumnos.id as id',
+            'alumnos.matricula as matricula',
+            'alumnos.alumnos as alumnos',
+            'alumnos.primer_apellido as primer_apellido',
+            'alumnos.segundo_apellido as segundo_apellido',
+            'alumnos.fecha_nacimiento as fecha_nacimiento',
+            'alumnos.cuatrimestre as cuatrimestre',
+            'alumnos.porcentaje as porcentaje',
+            'carreras.nombre as nombre',
+            DB::raw('(SELECT COUNT(*) FROM calificaciones WHERE calificaciones.id_alumno = alumnos.id) as asignaturas')
+        )
+        ->join('carreras', 'carreras.id', '=', 'alumnos.id_carrera')
+        ->get();
+        
+        $carreras=DB::table('carreras')->get();
+        return view('partials.alumnos',compact('carreras','alumnos'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -25,3 +25,4 @@ Route::post('/alumno_create/{id}',[CalificacionesController::class,'create']);
 
 Route::post('/calificaciones/update/{id}', [CalificacionesController::class, 'update']);
 
+Route::get('/busqueda',[AlumnosController::class,'search']);

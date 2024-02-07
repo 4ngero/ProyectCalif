@@ -22,17 +22,26 @@ class CalificacionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $req,$id)
+    public function create(Request $req, $id)
     {
+    $count = DB::table('calificaciones')
+                ->where('id_alumno', $id)
+                ->count();
+    if ($count < 13) {
         DB::table('calificaciones')->insert([
-            "id_alumno"=>$id,
-            "id_materia"=>$req->input('_Asignatura'),
-            "parcial"=>1,
-            "created_at"=>Carbon::now(),
-            "updated_at"=>Carbon::now(),
+            "id_alumno" => $id,
+            "id_materia" => $req->input('_Asignatura'),
+            "parcial" => 1,
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
-        return back()->with('Confirmacion',"Asignatura registrada correctamente");
+
+        return back()->with('Confirmacion', "Asignatura registrada correctamente");
+    } else {
+        return back()->with('Error', 'No se pueden agregar más de 13 registros por alumno.');
     }
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,6 +89,14 @@ class CalificacionesController extends Controller
             $probExamen = 31 / 101;
             if ($n!=0){
                 $probabilidadAprobar = $this->coeficienteBinomial($numExamenes, $k)*pow($probExamen, $k)*pow(1 - $probExamen, $numExamenes - $k)*100;
+                DB::table('alumnos')->where('id', $id)
+                ->update([
+                    "porcentaje"=>$probabilidadAprobar,
+                    "updated_at" => Carbon::now(),
+                ]);
+            }
+            else{
+                $probabilidadAprobar =100;
                 DB::table('alumnos')->where('id', $id)
                 ->update([
                     "porcentaje"=>$probabilidadAprobar,
