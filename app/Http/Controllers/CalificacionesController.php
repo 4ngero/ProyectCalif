@@ -22,7 +22,7 @@ class CalificacionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $req, $id)
+    public function create(Request $req, $id,$cuatri)
     {
     $count = DB::table('calificaciones')
                 ->where('id_alumno', $id)
@@ -31,7 +31,7 @@ class CalificacionesController extends Controller
         DB::table('calificaciones')->insert([
             "id_alumno" => $id,
             "id_materia" => $req->input('_Asignatura'),
-            "parcial" => 1,
+            "parcial" => $cuatri,
             "created_at" => Carbon::now(),
             "updated_at" => Carbon::now(),
         ]);
@@ -54,7 +54,7 @@ class CalificacionesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id,$cuatri)
     {
         $alumno=DB::table('alumnos')
         ->join('carreras','alumnos.id_carrera','=','carreras.id')
@@ -77,7 +77,9 @@ class CalificacionesController extends Controller
          'calificaciones.final as final')
         ->join('materias','materias.id','=','calificaciones.id_materia')
         ->where('calificaciones.id_alumno',$id)
+        ->where('calificaciones.parcial',$cuatri)
         ->get();
+        $probabilidadAprobar =100;
         $t = $inscripcion->count();
         if ($t!=0){
             $min = ceil($t * 0.5);
@@ -88,12 +90,14 @@ class CalificacionesController extends Controller
             $numExamenes = $n;
             $probExamen = 31 / 101;
             if ($n!=0){
+                if($k>0){
                 $probabilidadAprobar = $this->coeficienteBinomial($numExamenes, $k)*pow($probExamen, $k)*pow(1 - $probExamen, $numExamenes - $k)*100;
                 DB::table('alumnos')->where('id', $id)
                 ->update([
                     "porcentaje"=>$probabilidadAprobar,
                     "updated_at" => Carbon::now(),
                 ]);
+                }
             }
             else{
                 $probabilidadAprobar =100;
@@ -104,7 +108,7 @@ class CalificacionesController extends Controller
                 ]);
             }
         }
-        return view('partials.perfil_alumno',compact('alumno','carreras','id','asignaturas','inscripcion','probabilidadAprobar'));
+        return view('partials.perfil_alumno',compact('alumno','carreras','id','asignaturas','inscripcion','probabilidadAprobar','cuatri'));
     }
 
     public function coeficienteBinomial($n, $k)

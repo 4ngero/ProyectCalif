@@ -69,7 +69,7 @@
                             <td scope="col">{{$a->nombre}}</td>
                             <td scope="col">{{$a->cuatrimestre}}</td>
                             <td scope="col">
-                                <a href="calificaciones/{{$a->id}}">
+                                <a href="calificaciones/{{$a->id}}/{{$a->cuatrimestre}}">
                                     <button type="button" class="btn btn-outline-primary"><i class="bi bi-person-circle"></i> Perfil Alumno</button>
                                 </a>
                             </td>

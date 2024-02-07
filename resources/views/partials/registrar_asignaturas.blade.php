@@ -6,7 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="/alumno_create/{{$id}}" method="post">
+            <form action="/alumno_create/{{$id}}/{{$cuatri}}" method="post">
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-6">
