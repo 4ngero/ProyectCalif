@@ -67,8 +67,8 @@
                 </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal"><i class="bi bi-arrow-return-left"></i> Cerrar</button>
+        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-repeat"></i> Actualizar</button>
         </form>
         </div>
       </div>

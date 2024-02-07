@@ -1,64 +1,67 @@
 @extends('layouts.template')
 @section('titulo','Perfil Alumno')
 @section('contenido')
-
+<body style="background-color:rgb(169, 182, 187);">
 <div class="container">
     <div class="row">   
         <div class="col-4">
-            <div class=" card card-body mt-5 mb-5">
+            <div class="card card-body mt-5 mb-5">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12">
                         <ul class="list-group list-group-flush">
+                            <div class="text-center mb-3">
+                                <img src="https://www.maesedavinci.cl/wp-content/uploads/2020/05/alumno1.png" alt="Imagen de perfil" class="img-fluid rounded-circle mx-auto" style="width: 150px;">
+                            </div>
+                            <hr>
                             <li class="list-group-item">
-                                <ul class="list-group">
+                                <ul class="list-group" style="list-style-type: none;">
                                     <li>
-                                        Matricula: {{$alumno->matricula}}
+                                        <strong>Matricula:</strong> {{$alumno->matricula}}
                                     </li>
                                     <li>
-                                        Nombre: {{$alumno->alumnos}} {{$alumno->primer_apellido}} {{$alumno->segundo_apellido}}
+                                        <strong>Nombre:</strong> {{$alumno->alumnos}} {{$alumno->primer_apellido}} {{$alumno->segundo_apellido}}
                                     </li>
                                     <li>
-                                        Fecha de Nacimiento: {{$alumno->fecha_nacimiento}}
+                                        <strong>Fecha de Nacimiento:</strong> {{$alumno->fecha_nacimiento}}
                                     </li>
                                     <li>
-                                        Carrera: {{$alumno->nombre}}
+                                        <strong>Carrera:</strong> {{$alumno->nombre}}
                                     </li>
                                     <li>
-                                        Cuatrimestre: {{$alumno->cuatrimestre}}
+                                        <strong>Cuatrimestre:</strong> {{$alumno->cuatrimestre}}
                                     </li>
-                                </ul>
+                                </ul>                                
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col">
                                         @include('partials.actualizar_alumno')
-                                        <button type="button" class="btn btn-outline-info mb-2" data-bs-toggle="modal" data-bs-target="#ActualizarAlumno">
-                                             Editar Datos
+                                        <button type="button" class="btn btn-outline-warning mb-2" data-bs-toggle="modal" data-bs-target="#ActualizarAlumno">
+                                            <i class="bi bi-journal-text"></i> Editar Datos
                                         </button>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col">
                                         @include('partials.registrar_asignaturas')
-                                        <button type="button" class="btn btn-outline-info mb-2" data-bs-toggle="modal" data-bs-target="#Registrar_Asignaturas">
-                                             Registrar Asignaturas
+                                        <button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#Registrar_Asignaturas">
+                                            <i class="bi bi-pencil-square"></i> Asignaturas
                                         </button>
                                     </div>
                                 </div>
-                            </li>
-                          </ul>
+                            </li>                            
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-8">
-            <div class=" card card-body mt-5">
+            <div class="card card-body mt-5"> 
                 <div class="row">
                     <div class="col">
-                        <h1>
+                        <h1 class="text-center">
                             Calificaciones
                         </h1>
-                        <table>
+                        <hr>
+                        <table class="table"> 
                             <thead>
                                 <tr>
                                     <th>Asignatura</th>
@@ -107,6 +110,6 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
 
 @endsection
