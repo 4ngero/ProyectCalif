@@ -55,6 +55,7 @@
                         @foreach($alumnos as $a)
                         <tr 
                         @if($a->asignaturas < 7)
+                        class="table-warning"
                         @elseif($a->asignaturas >= 7)
                             @if($a->porcentaje > 70) class="table-success"
                             @elseif($a->porcentaje <= 70 && $a->porcentaje >= 30) class="table-info"
